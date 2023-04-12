@@ -5,25 +5,21 @@
 #                                                     +:+ +:+         +:+      #
 #    By: moudrib <moudrib@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2023/03/28 23:53:45 by moudrib           #+#    #+#              #
-#    Updated: 2023/04/12 10:59:25 by moudrib          ###   ########.fr        #
+#    Created: 2023/04/12 10:57:53 by moudrib           #+#    #+#              #
+#    Updated: 2023/04/12 17:18:42 by moudrib          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME	= philo
+NAME	= philo_bonus
 CC		= cc
 Y		= \x1B[33m
 G		= \x1B[32m
 W		= \x1B[0m
 B		= \033[1m
-CFLAGS	= -Wall -Wextra -Werror -g -pthread #-fsanitize=address
+CFLAGS	= -Wall -Wextra -Werror -g -pthread -fsanitize=address
 OBJDIR	= Object_files/
 SRC		= 	\
-			utils.c \
-			philo.c \
-			parsing.c \
-			routine.c \
-			list_utils.c \
+
 
 OBJ		= $(addprefix $(OBJDIR),$(SRC:.c=.o))
 

@@ -6,7 +6,7 @@
 /*   By: moudrib <moudrib@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/29 00:22:57 by moudrib           #+#    #+#             */
-/*   Updated: 2023/04/12 10:31:51 by moudrib          ###   ########.fr       */
+/*   Updated: 2023/04/12 15:38:02 by moudrib          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@
 typedef struct s_list
 {
 	pthread_mutex_t	fork;
-	pthread_mutex_t	print;
+	pthread_mutex_t	*print;
 	pthread_mutex_t	update_value;
 	int				philo_id;
 	size_t			time_to_die;

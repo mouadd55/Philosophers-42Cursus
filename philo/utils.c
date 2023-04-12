@@ -6,7 +6,7 @@
 /*   By: moudrib <moudrib@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/03 04:15:41 by moudrib           #+#    #+#             */
-/*   Updated: 2023/04/09 21:03:51 by moudrib          ###   ########.fr       */
+/*   Updated: 2023/04/12 17:16:39 by moudrib          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,5 +65,5 @@ void	ft_sleep(size_t milliseconds)
 
 	start = ft_current_time();
 	while (milliseconds > ft_current_time() - start)
-		usleep(10);
+		usleep(100);
 }
