@@ -6,7 +6,7 @@
 #    By: moudrib <moudrib@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/28 23:53:45 by moudrib           #+#    #+#              #
-#    Updated: 2023/04/09 12:24:16 by moudrib          ###   ########.fr        #
+#    Updated: 2023/04/12 09:50:41 by moudrib          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,10 +19,11 @@ B		= \033[1m
 CFLAGS	= -Wall -Wextra -Werror -g -pthread -fsanitize=address
 OBJDIR	= Object_files/
 SRC		= 	\
+			utils.c \
 			philo.c \
 			parsing.c \
+			routine.c \
 			list_utils.c \
-			utils.c \
 
 OBJ		= $(addprefix $(OBJDIR),$(SRC:.c=.o))
 

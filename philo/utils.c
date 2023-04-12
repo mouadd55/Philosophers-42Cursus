@@ -6,7 +6,7 @@
 /*   By: moudrib <moudrib@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/03 04:15:41 by moudrib           #+#    #+#             */
-/*   Updated: 2023/04/09 18:25:37 by moudrib          ###   ########.fr       */
+/*   Updated: 2023/04/09 21:03:51 by moudrib          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,11 +59,11 @@ size_t	ft_current_time(void)
 	return (milliseconds);
 }
 
-void	ft_sleep(size_t melliseconds)
+void	ft_sleep(size_t milliseconds)
 {
 	size_t	start;
 
 	start = ft_current_time();
-	while (melliseconds > ft_current_time() - start)
+	while (milliseconds > ft_current_time() - start)
 		usleep(10);
 }

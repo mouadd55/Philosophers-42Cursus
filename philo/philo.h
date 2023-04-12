@@ -6,7 +6,7 @@
 /*   By: moudrib <moudrib@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/29 00:22:57 by moudrib           #+#    #+#             */
-/*   Updated: 2023/04/09 18:26:35 by moudrib          ###   ########.fr       */
+/*   Updated: 2023/04/12 10:31:51 by moudrib          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,13 +24,14 @@ typedef struct s_list
 {
 	pthread_mutex_t	fork;
 	pthread_mutex_t	print;
+	pthread_mutex_t	update_value;
 	int				philo_id;
-	int				time_to_die;
-	int				time_to_eat;
-	int				time_to_sleep;
-	int				last_time_to_eat;
-	int				eat_again;
-	int				number_of_times_each_philosopher_must_eat;
+	size_t			time_to_die;
+	size_t			time_to_eat;
+	size_t			time_to_sleep;
+	size_t			last_time_to_eat;
+	size_t			start_of_the_program;
+	int				num_of_meals;
 	struct s_list	*next;
 }	t_list;
 
@@ -50,5 +51,10 @@ void		ft_lstadd_back(t_list **head, t_list *new);
 void		*ft_philosopher_actions(void *list);
 size_t		ft_current_time(void);
 void		ft_sleep(size_t melliseconds);
+
+void		philosopher_is_thinking(t_list *philosophers);
+void		philosopher_is_sleeping(t_list *philosophers);
+void		philosopher_is_eating(t_list *philosophers);
+void		*ft_philosopher_actions(void *list);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: moudrib <moudrib@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/02 02:24:12 by moudrib           #+#    #+#             */
-/*   Updated: 2023/04/09 18:29:03 by moudrib          ###   ########.fr       */
+/*   Updated: 2023/04/12 10:32:45 by moudrib          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,10 @@ t_list	*ft_lstnew(int id, int ac, char **av)
 	node->time_to_die = ft_atoi(av[2]);
 	node->time_to_eat = ft_atoi(av[3]);
 	node->time_to_sleep = ft_atoi(av[4]);
-	node->eat_again = 0;
 	node->last_time_to_eat = 0;
+	node->start_of_the_program = ft_current_time();
 	if (ac == 6)
-		node->number_of_times_each_philosopher_must_eat = ft_atoi(av[5]);
+		node->num_of_meals = ft_atoi(av[5]);
 	node->next = NULL;
 	return (node);
 }
