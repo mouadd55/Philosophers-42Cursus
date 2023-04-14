@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   philo.h                                            :+:      :+:    :+:   */
+/*   philo_bonus.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: moudrib <moudrib@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/29 00:22:57 by moudrib           #+#    #+#             */
-/*   Updated: 2023/04/14 02:45:02 by moudrib          ###   ########.fr       */
+/*   Created: 2023/04/13 18:40:23 by moudrib           #+#    #+#             */
+/*   Updated: 2023/04/14 01:34:05 by moudrib          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,22 +20,6 @@
 # include <pthread.h>
 # include <sys/time.h>
 
-typedef struct s_list
-{
-	pthread_mutex_t	fork;
-	pthread_mutex_t	*print;
-	pthread_mutex_t	update_value;
-	int				meal;
-	int				philo_id;
-	size_t			time_to_die;
-	size_t			time_to_eat;
-	size_t			time_to_sleep;
-	size_t			last_time_to_eat;
-	size_t			start_of_the_program;
-	int				number_of_meals;
-	struct s_list	*next;
-}	t_list;
-
 /********************************** Parsing ***********************************/
 void		ft_error(int error);
 int			ft_strlen(char *str);
@@ -44,22 +28,9 @@ ssize_t		ft_atoi(const char *str);
 int			ft_count_words(char *str);
 int			ft_check_digit(char **av);
 
-/********************************* List utils *********************************/
-t_list		*ft_lstlast(t_list *head);
-void		*ft_destroy_list(t_list **head);
-t_list		*ft_lstnew(int id, int ac, char **av);
-void		ft_lstadd_back(t_list **head, t_list *new);
-void		ft_create_list(int philos, t_list **list, int ac, char **av);
-
 /************************************ Utils ***********************************/
 
 size_t		ft_current_time(void);
 void		ft_sleep(size_t melliseconds);
-
-/*************************** Routine of philosophers***************************/
-
-void		*ft_philosopher_actions(void *list);
-void		philosopher_is_eating(t_list *philosophers);
-void		philosopher_is_sleeping_and_thinking(t_list *philosophers);
 
 #endif

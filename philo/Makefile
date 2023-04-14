@@ -6,7 +6,7 @@
 #    By: moudrib <moudrib@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/28 23:53:45 by moudrib           #+#    #+#              #
-#    Updated: 2023/04/12 10:59:25 by moudrib          ###   ########.fr        #
+#    Updated: 2023/04/13 18:46:45 by moudrib          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ Y		= \x1B[33m
 G		= \x1B[32m
 W		= \x1B[0m
 B		= \033[1m
-CFLAGS	= -Wall -Wextra -Werror -g -pthread #-fsanitize=address
+CFLAGS	= -Wall -Wextra -Werror -g -pthread -fsanitize=thread
 OBJDIR	= Object_files/
 SRC		= 	\
 			utils.c \
