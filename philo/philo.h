@@ -6,7 +6,7 @@
 /*   By: moudrib <moudrib@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/29 00:22:57 by moudrib           #+#    #+#             */
-/*   Updated: 2023/04/14 02:45:02 by moudrib          ###   ########.fr       */
+/*   Updated: 2023/04/15 22:10:33 by moudrib          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ typedef struct s_list
 }	t_list;
 
 /********************************** Parsing ***********************************/
-void		ft_error(int error);
+void		ft_error(int ac, int error);
 int			ft_strlen(char *str);
 int			ft_limits(char *arg);
 ssize_t		ft_atoi(const char *str);
@@ -46,7 +46,7 @@ int			ft_check_digit(char **av);
 
 /********************************* List utils *********************************/
 t_list		*ft_lstlast(t_list *head);
-void		*ft_destroy_list(t_list **head);
+void		*ft_destroy_list(t_list **head, int number_of_philos);
 t_list		*ft_lstnew(int id, int ac, char **av);
 void		ft_lstadd_back(t_list **head, t_list *new);
 void		ft_create_list(int philos, t_list **list, int ac, char **av);

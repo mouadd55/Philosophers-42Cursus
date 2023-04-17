@@ -6,7 +6,7 @@
 /*   By: moudrib <moudrib@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/02 02:24:12 by moudrib           #+#    #+#             */
-/*   Updated: 2023/04/14 02:02:50 by moudrib          ###   ########.fr       */
+/*   Updated: 2023/04/15 22:10:14 by moudrib          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,14 +60,16 @@ t_list	*ft_lstlast(t_list *head)
 	return (NULL);
 }
 
-void	*ft_destroy_list(t_list **head)
+void	*ft_destroy_list(t_list **head, int number_of_philos)
 {
+	int		i;
 	t_list	*tmp;
 
+	i = -1;
 	if (!head || !*head)
 		return (0);
 	tmp = *head;
-	while (tmp)
+	while (++i < number_of_philos)
 	{
 		tmp = (*head)->next;
 		free (*head);

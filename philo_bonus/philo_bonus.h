@@ -6,7 +6,7 @@
 /*   By: moudrib <moudrib@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 18:40:23 by moudrib           #+#    #+#             */
-/*   Updated: 2023/04/14 01:34:05 by moudrib          ###   ########.fr       */
+/*   Updated: 2023/04/14 20:52:44 by moudrib          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 # include <unistd.h>
 # include <pthread.h>
 # include <sys/time.h>
+# include <semaphore.h>
 
 /********************************** Parsing ***********************************/
 void		ft_error(int error);
