@@ -6,7 +6,7 @@
 /*   By: moudrib <moudrib@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 18:41:21 by moudrib           #+#    #+#             */
-/*   Updated: 2023/04/13 18:41:28 by moudrib          ###   ########.fr       */
+/*   Updated: 2023/05/23 23:21:55 by moudrib          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ int	ft_count_words(char *str)
 	return (count);
 }
 
-int	ft_check_digit(char **av)
+int	ft_check_digit(char **av, t_info *info)
 {
 	int	i;
 	int	j;
@@ -74,5 +74,13 @@ int	ft_check_digit(char **av)
 			if (!(av[i][j] >= '0' && av[i][j++] <= '9'))
 				ft_error(3);
 	}
+	info->meal = 0;
+	info->time_to_die = ft_atoi(av[2]);
+	info->time_to_eat = ft_atoi(av[3]);
+	info->time_to_sleep = ft_atoi(av[4]);
+	if (av[5])
+		info->number_of_meals = ft_atoi(av[5]);
+	else
+		info->number_of_meals = 0;
 	return (ft_atoi(av[1]));
 }
