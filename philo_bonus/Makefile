@@ -6,7 +6,7 @@
 #    By: moudrib <moudrib@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/12 10:57:53 by moudrib           #+#    #+#              #
-#    Updated: 2023/04/16 00:11:06 by moudrib          ###   ########.fr        #
+#    Updated: 2023/05/27 00:51:56 by moudrib          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ Y		= \x1B[33m
 G		= \x1B[32m
 W		= \x1B[0m
 B		= \033[1m
-CFLAGS	= -Wall -Wextra -Werror -g -pthread #-lpthread -lrt -fsanitize=thread
+CFLAGS	= -Wall -Wextra -Werror -g -pthread
 OBJDIR	= Object_files/
 SRC		= 	\
 			utils_bonus.c \

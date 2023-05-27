@@ -6,31 +6,27 @@
 /*   By: moudrib <moudrib@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/14 20:52:13 by moudrib           #+#    #+#             */
-/*   Updated: 2023/05/23 23:33:32 by moudrib          ###   ########.fr       */
+/*   Updated: 2023/05/27 00:59:03 by moudrib          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo_bonus.h"
 
-int    ft_check_number_of_meals(int number_of_philos, t_info *info)
+void	*ft_check_number_of_meals(void *infos)
 {
 	int		i;
-	int		count;
+	t_info	*info;
 
 	i = 0;
-	count = 0;
-	sem_wait(info->update_value);
-	if (info->meal == info->number_of_meals)
-		count++;
-	sem_post(info->update_value);
-	if (count == number_of_philos)
+	info = (t_info *)infos;
+	while (i < info->number_of_philos)
 	{
-		printf("1111\n");
-		sem_wait(info->print);
-		printf("\e[33mPhilosophers: Pleeeeease just one another meal.\e[0m\n");
-		return (1);
+		sem_wait(info->meals);
+		i++;
 	}
-	return (0);
+	sem_wait(info->print);
+	printf("\e[33mPhilosophers: Pleeeeease just one another meal.\e[0m\n");
+	exit(1);
 }
 
 void	*ft_check_death(void *infos)
@@ -40,7 +36,6 @@ void	*ft_check_death(void *infos)
 	info = (t_info *)infos;
 	while (1)
 	{
-		
 		sem_wait(info->update_value);
 		if (ft_current_time() - info->last_time_to_eat > info->time_to_die)
 		{
@@ -49,58 +44,69 @@ void	*ft_check_death(void *infos)
 				- info->start_of_the_program, info->philo_id);
 			exit(1);
 		}
-		else if (info->number_of_meals
-			&& ft_check_number_of_meals(info->number_of_philos, info))
-			exit(1);
 		sem_post(info->update_value);
 	}
+}
+
+void	philosopher_is_sleeping_and_thinking(t_info *info)
+{
+	sem_post(info->forks);
+	sem_post(info->forks);
+	sem_wait(info->print);
+	printf("%7lu | Philosopher: %d is sleeping 💤\n",
+		ft_current_time() - info->start_of_the_program, info->philo_id);
+	sem_post(info->print);
+	ft_sleep(info->time_to_sleep);
+	sem_wait(info->print);
+	printf("%7lu | Philosopher: %d is thinking 🤔\n",
+		ft_current_time() - info->start_of_the_program, info->philo_id);
+	sem_post(info->print);
+}
+
+void	philosopher_is_eating(t_info *info)
+{
+	sem_wait(info->forks);
+	sem_wait(info->print);
+	printf("\e[1m%7lu | Philosopher: %d has taken a fork 🍴\n",
+		ft_current_time() - info->start_of_the_program, info->philo_id);
+	sem_post(info->print);
+	sem_wait(info->forks);
+	sem_wait(info->print);
+	printf("\e[1m%7lu | Philosopher: %d has taken a fork 🍴\n",
+		ft_current_time() - info->start_of_the_program, info->philo_id);
+	sem_post(info->print);
+	sem_wait(info->print);
+	printf("%7lu | Philosopher: %d is eating 🍝\n",
+		ft_current_time() - info->start_of_the_program, info->philo_id);
+	sem_post(info->print);
+	sem_wait(info->update_value);
+	info->last_time_to_eat = ft_current_time();
+	sem_post(info->update_value);
+	ft_sleep(info->time_to_eat);
+	sem_wait(info->update_value);
+	info->meal++;
+	sem_post(info->update_value);
+	sem_wait(info->update_value);
+	if (info->meal == info->number_of_meals)
+		sem_post(info->meals);
+	sem_post(info->update_value);
 }
 
 void	*ft_philosopher_actions(void *infos)
 {
 	t_info		*info;
-	pthread_t	thread;
+	pthread_t	thread1;
 
+	// pthread_t	thread2;
 	info = (t_info *)infos;
 	if (info->philo_id % 2 == 0)
 		ft_sleep(100);
-	pthread_create(&thread, NULL, ft_check_death, info);
+	pthread_create(&thread1, NULL, ft_check_death, info);
+	// pthread_create(&thread2, NULL, ft_check_number_of_meals, info);
 	while (1)
 	{
-		sem_wait(info->forks);
-		sem_wait(info->print);
-		printf("\e[1m%7lu | Philosopher: %d has taken a fork 🍴\n", ft_current_time()
-		- info->start_of_the_program, info->philo_id);
-		sem_post(info->print);
-		sem_wait(info->forks);
-		sem_wait(info->print);
-		printf("\e[1m%7lu | Philosopher: %d has taken a fork 🍴\n", ft_current_time()
-		- info->start_of_the_program, info->philo_id);
-		sem_post(info->print);
-		sem_wait(info->print);
-		printf("%7lu | Philosopher: %d is eating 🍝\n", ft_current_time()
-		- info->start_of_the_program, info->philo_id);
-		sem_post(info->print);
-		sem_wait(info->update_value);
-		info->last_time_to_eat = ft_current_time();
-		sem_post(info->update_value);
-		ft_sleep(info->time_to_eat);
-
-		sem_wait(info->update_value);
-		info->meal++;
-		sem_post(info->update_value);
-
-		sem_post(info->forks);
-		sem_post(info->forks);
-		sem_wait(info->print);
-		printf("%7lu | Philosopher: %d is sleeping 💤\n", ft_current_time()
-		- info->start_of_the_program, info->philo_id);
-		sem_post(info->print);
-		ft_sleep(info->time_to_sleep);
-		sem_wait(info->print);
-		printf("%7lu | Philosopher: %d is thinking 🤔\n", ft_current_time()
-		- info->start_of_the_program, info->philo_id);
-		sem_post(info->print);
+		philosopher_is_eating(info);
+		philosopher_is_sleeping_and_thinking(info);
 	}
 	return (0);
 }
@@ -110,28 +116,30 @@ pid_t	*ft_create_processes(int number_of_philos, t_info *info)
 	int			i;
 	pid_t		*pids;
 
+	i = 0;
 	pids = malloc (sizeof(pid_t) * number_of_philos);
 	if (!pids)
 		return (0);
-	info->last_time_to_eat = ft_current_time();
-	for (i = 0; i < number_of_philos; i++)
+	while (i < number_of_philos)
 	{
-        pids[i] = fork();
+		info->last_time_to_eat = ft_current_time();
+		pids[i] = fork();
 		if (pids[i] == 0)
 		{
 			info->philo_id = i + 1;
 			ft_philosopher_actions(info);
-        }
+		}
 		else if (pids[i] < 0)
-            return (0);
-    }
+			return (0);
+		i++;
+	}
 	return (pids);
 }
 
 int	main(int ac, char **av)
 {
-	pid_t		*pids;
 	t_info		info;
+	pthread_t	thread2;
 
 	if (ac < 5)
 		ft_error(1);
@@ -141,12 +149,15 @@ int	main(int ac, char **av)
 	sem_unlink("print");
 	sem_unlink("forks");
 	sem_unlink("update_value");
+	sem_unlink("meals");
 	info.print = sem_open("print", O_CREAT, 0644, 1);
-	info.print = sem_open("update_value", O_CREAT, 0644, 1);
+	info.update_value = sem_open("update_value", O_CREAT, 0644, 1);
 	info.forks = sem_open("forks", O_CREAT, 0644, info.number_of_philos);
+	info.meals = sem_open("meals", O_CREAT, 0644, 0);
 	info.start_of_the_program = ft_current_time();
-	pids = ft_create_processes(info.number_of_philos, &info);
-	waitpid(0, NULL , 0);
+	pthread_create(&thread2, NULL, ft_check_number_of_meals, &info);
+	ft_create_processes(info.number_of_philos, &info);
+	waitpid(0, NULL, 0);
 	kill(0, SIGINT);
-    return 0;
+	return (0);
 }
