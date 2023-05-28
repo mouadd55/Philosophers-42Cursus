@@ -6,7 +6,7 @@
 /*   By: moudrib <moudrib@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/14 20:52:13 by moudrib           #+#    #+#             */
-/*   Updated: 2023/05/27 00:59:03 by moudrib          ###   ########.fr       */
+/*   Updated: 2023/05/28 21:53:05 by moudrib          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,69 +46,6 @@ void	*ft_check_death(void *infos)
 		}
 		sem_post(info->update_value);
 	}
-}
-
-void	philosopher_is_sleeping_and_thinking(t_info *info)
-{
-	sem_post(info->forks);
-	sem_post(info->forks);
-	sem_wait(info->print);
-	printf("%7lu | Philosopher: %d is sleeping 💤\n",
-		ft_current_time() - info->start_of_the_program, info->philo_id);
-	sem_post(info->print);
-	ft_sleep(info->time_to_sleep);
-	sem_wait(info->print);
-	printf("%7lu | Philosopher: %d is thinking 🤔\n",
-		ft_current_time() - info->start_of_the_program, info->philo_id);
-	sem_post(info->print);
-}
-
-void	philosopher_is_eating(t_info *info)
-{
-	sem_wait(info->forks);
-	sem_wait(info->print);
-	printf("\e[1m%7lu | Philosopher: %d has taken a fork 🍴\n",
-		ft_current_time() - info->start_of_the_program, info->philo_id);
-	sem_post(info->print);
-	sem_wait(info->forks);
-	sem_wait(info->print);
-	printf("\e[1m%7lu | Philosopher: %d has taken a fork 🍴\n",
-		ft_current_time() - info->start_of_the_program, info->philo_id);
-	sem_post(info->print);
-	sem_wait(info->print);
-	printf("%7lu | Philosopher: %d is eating 🍝\n",
-		ft_current_time() - info->start_of_the_program, info->philo_id);
-	sem_post(info->print);
-	sem_wait(info->update_value);
-	info->last_time_to_eat = ft_current_time();
-	sem_post(info->update_value);
-	ft_sleep(info->time_to_eat);
-	sem_wait(info->update_value);
-	info->meal++;
-	sem_post(info->update_value);
-	sem_wait(info->update_value);
-	if (info->meal == info->number_of_meals)
-		sem_post(info->meals);
-	sem_post(info->update_value);
-}
-
-void	*ft_philosopher_actions(void *infos)
-{
-	t_info		*info;
-	pthread_t	thread1;
-
-	// pthread_t	thread2;
-	info = (t_info *)infos;
-	if (info->philo_id % 2 == 0)
-		ft_sleep(100);
-	pthread_create(&thread1, NULL, ft_check_death, info);
-	// pthread_create(&thread2, NULL, ft_check_number_of_meals, info);
-	while (1)
-	{
-		philosopher_is_eating(info);
-		philosopher_is_sleeping_and_thinking(info);
-	}
-	return (0);
 }
 
 pid_t	*ft_create_processes(int number_of_philos, t_info *info)

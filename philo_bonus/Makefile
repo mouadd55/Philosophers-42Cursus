@@ -6,7 +6,7 @@
 #    By: moudrib <moudrib@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/12 10:57:53 by moudrib           #+#    #+#              #
-#    Updated: 2023/05/27 00:51:56 by moudrib          ###   ########.fr        #
+#    Updated: 2023/05/28 21:57:24 by moudrib          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,6 +22,7 @@ SRC		= 	\
 			utils_bonus.c \
 			philo_bonus.c \
 			parsing_bonus.c \
+			routine_bonus.c \
 
 OBJ		= $(addprefix $(OBJDIR),$(SRC:.c=.o))
 

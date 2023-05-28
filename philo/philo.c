@@ -6,7 +6,7 @@
 /*   By: moudrib <moudrib@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/29 00:26:06 by moudrib           #+#    #+#             */
-/*   Updated: 2023/05/11 20:55:56 by moudrib          ###   ########.fr       */
+/*   Updated: 2023/05/28 22:36:33 by moudrib          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	ft_check_number_of_meals(int number_of_philos, t_list *philosophers)
 	while (i++ < number_of_philos)
 	{
 		pthread_mutex_lock(&tmp->update_value);
-		if (tmp->meal == philosophers->number_of_meals)
+		if (tmp->meal >= philosophers->number_of_meals)
 			count++;
 		pthread_mutex_unlock(&tmp->update_value);
 		tmp = tmp->next;
@@ -96,38 +96,23 @@ pthread_t	*ft_create_threads(int number_of_philos, t_list **philosophers)
 	return (threads);
 }
 
-void	leaks()
-{
-	system("leaks philo");
-}
-
 int	main(int ac, char **av)
 {
-	// atexit(leaks);
 	t_list		*tmp;
 	pthread_t	*threads;
 	t_list		*philosophers;
 	int			number_of_philos;
 
-	ft_error(ac, 2);
-	number_of_philos = ft_check_digit(av);
+	if (ft_error(ac, 2) || ft_check_digit(av, &number_of_philos))
+		return (0);
 	ft_create_list(number_of_philos, &philosophers, ac, av);
 	threads = ft_create_threads(number_of_philos, &philosophers);
 	tmp = philosophers;
 	while (1)
 	{
-		if (ft_check_death(philosophers, tmp))
-			return (0);
-		else if (tmp->number_of_meals
-			&& ft_check_number_of_meals(number_of_philos, philosophers))
+		if (ft_check_death(philosophers, tmp) || (tmp->number_of_meals
+				&& ft_check_number_of_meals(number_of_philos, philosophers)))
 		{
-			tmp = philosophers;
-			for (int i = 0; i < number_of_philos; i++)
-			{
-				pthread_mutex_destroy(&tmp->fork);
-				pthread_mutex_destroy(&tmp->update_value);
-				tmp = tmp->next;
-			}
 			free(threads);
 			return (0);
 		}	
