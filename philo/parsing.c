@@ -6,7 +6,7 @@
 /*   By: moudrib <moudrib@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/31 17:10:01 by moudrib           #+#    #+#             */
-/*   Updated: 2023/05/28 21:56:45 by moudrib          ###   ########.fr       */
+/*   Updated: 2023/05/30 16:42:35 by moudrib          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,8 @@ void	destroy_mutexes(t_list *philosophers, int number_of_philos)
 		pthread_mutex_destroy(&philosophers->update_value);
 		philosophers = philosophers->next;
 		i++;
-	}	
+	}
+	
 }
 
 int	ft_error(int ac, int error)
