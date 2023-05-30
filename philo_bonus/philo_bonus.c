@@ -6,7 +6,7 @@
 /*   By: moudrib <moudrib@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/14 20:52:13 by moudrib           #+#    #+#             */
-/*   Updated: 2023/05/28 21:53:05 by moudrib          ###   ########.fr       */
+/*   Updated: 2023/05/30 16:37:57 by moudrib          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,8 @@ int	main(int ac, char **av)
 	pthread_create(&thread2, NULL, ft_check_number_of_meals, &info);
 	ft_create_processes(info.number_of_philos, &info);
 	waitpid(0, NULL, 0);
+	sem_close(info.forks);
+	sem_close(info.update_value);
 	kill(0, SIGINT);
 	return (0);
 }
