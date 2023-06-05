@@ -6,7 +6,7 @@
 /*   By: moudrib <moudrib@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/28 21:52:23 by moudrib           #+#    #+#             */
-/*   Updated: 2023/05/28 21:58:48 by moudrib          ###   ########.fr       */
+/*   Updated: 2023/06/05 11:30:56 by moudrib          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,8 +62,6 @@ void	*ft_philosopher_actions(void *infos)
 	pthread_t	thread1;
 
 	info = (t_info *)infos;
-	if (info->philo_id % 2 == 0)
-		ft_sleep(100);
 	pthread_create(&thread1, NULL, ft_check_death, info);
 	pthread_detach(thread1);
 	while (1)

@@ -1,9 +1,0 @@
-{
-	"files.associations": {
-		"time.h": "c",
-		"locale": "c",
-		"pthread.h": "c",
-		"limits.h": "c",
-		"stdio.h": "c"
-	}
-}
