@@ -6,7 +6,7 @@
 /*   By: moudrib <moudrib@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/29 00:22:57 by moudrib           #+#    #+#             */
-/*   Updated: 2023/05/28 21:54:29 by moudrib          ###   ########.fr       */
+/*   Updated: 2023/06/17 13:04:25 by moudrib          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,6 @@ void		ft_create_list(int philos, t_list **list, int ac, char **av);
 
 size_t		ft_current_time(void);
 void		ft_sleep(size_t melliseconds);
-void		destroy_mutexes(t_list *philosophers, int number_of_philos);
 
 /************************** Routine of philosophers ***************************/
 

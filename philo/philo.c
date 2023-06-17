@@ -6,7 +6,7 @@
 /*   By: moudrib <moudrib@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/29 00:26:06 by moudrib           #+#    #+#             */
-/*   Updated: 2023/06/05 11:29:40 by moudrib          ###   ########.fr       */
+/*   Updated: 2023/06/17 13:04:19 by moudrib          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,7 +114,6 @@ int	main(int ac, char **av)
 				&& ft_check_number_of_meals(number_of_philos, philosophers)))
 		{
 			free(threads);
-			destroy_mutexes(philosophers, number_of_philos);
 			return (0);
 		}
 		usleep(100);

@@ -6,25 +6,11 @@
 /*   By: moudrib <moudrib@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/31 17:10:01 by moudrib           #+#    #+#             */
-/*   Updated: 2023/06/05 11:31:50 by moudrib          ###   ########.fr       */
+/*   Updated: 2023/06/17 13:04:16 by moudrib          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
-
-void	destroy_mutexes(t_list *philosophers, int number_of_philos)
-{
-	int	i;
-
-	i = 0;
-	while (i < number_of_philos)
-	{
-		pthread_mutex_destroy(&philosophers->fork);
-		pthread_mutex_destroy(&philosophers->update_value);
-		philosophers = philosophers->next;
-		i++;
-	}
-}
 
 int	ft_error(int ac, int error)
 {
